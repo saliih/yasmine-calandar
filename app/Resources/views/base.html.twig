@@ -2,12 +2,66 @@
 <html>
     <head>
         <meta charset="UTF-8" />
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
+        <title>{% block title %}Yasmine Press!{% endblock %}</title>
+        {% block stylesheets %}
+
+            {% stylesheets  filter="?scssphp"
+            'bundles/app/css/vendors/bootstrap.min.css'
+            'bundles/app/js/vendor/admin-lte/dist/css/AdminLTE.css'
+            %}
+            <link rel="stylesheet" href="{{ asset_url }}"/>
+            {% endstylesheets %}
+
+
+        {% endblock %}
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     </head>
     <body>
+   {# <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">Project name</a>
+            </div>
+            <div id="navbar" class="collapse navbar-collapse">
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="#">Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </div><!--/.nav-collapse -->
+        </div>
+    </nav>#}
+
+    <div class="container">
+
         {% block body %}{% endblock %}
-        {% block javascripts %}{% endblock %}
+
+    </div><!-- /.container -->
+
+
+
+
+
+
+
+
+    {% block javascripts %}
+            {% javascripts  filter="?jsqueeze"
+            'bundles/app/js/vendor/bootstrap.min.js'
+            'bundles/app/js/vendor/jquery-2.0.3.min.js'
+
+            %}
+            <script src="{{ asset_url }}"></script>
+            {% endjavascripts %}
+
+
+            <script src="{{ path('fos_js_routing_js', {'callback': 'fos.Router.setData'}) }}"></script>
+        {% endblock %}
     </body>
 </html>
