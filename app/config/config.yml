@@ -72,3 +72,6 @@ assetic:
         jsqueeze: ~
         scssphp:
             formatter: 'Leafo\ScssPhp\Formatter\Crunched'
+
+fos_js_routing:
+    routes_to_expose: []
