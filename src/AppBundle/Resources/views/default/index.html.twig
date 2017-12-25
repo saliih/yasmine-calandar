@@ -1,56 +1,91 @@
 {% extends '::base.html.twig' %}
+{% block javascripts %}
+    {{ parent() }}
+    {% javascripts  filter="?jsqueeze"
+    '@AppBundle/Resources/public/js/utils.js'
+    '@AppBundle/Resources/public/js/yasmine.js' %}
+    <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
 
+{% endblock %}
 {% block body %}
-<div class="row">
-    <div class="col-md-4">
-        <div class="box box-default">
-            <div class="box-header with-border">
-                <i class="fa fa-bullhorn"></i>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="box box-default">
+                <div class="box-header with-border">
+                    <i class="fa fa-bullhorn"></i>
 
-                <h3 class="box-title">Liste des images</h3>
-                <div class="box-tools pull-right">
-                    <button type="button" class="btn btn-sm btn-success pull-right" data-widget="collapse"><i class="fa fa-picture-o"></i> Téléchargement
-                    </button>
+                    <h3 class="box-title">Liste des images</h3>
+                    <div class="box-tools pull-right">
+
+                        <form enctype="multipart/form-data" id="uploadForm" name="uploadForm" action="{{ path('upload_files') }}" method="post">
+    <span id="fileselector">
+        <label class="btn btn-sm btn-success pull-right" for="upload-file-selector">
+            <input id="upload-file-selector" multiple name="file[]" type="file">
+            <i class="fa_icon icon-upload-alt margin-correction"></i>Téléchargement
+        </label>
+    </span>
+                        </form>
+
+                    </div>
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body" id="listImages">
+
+                </div>
+                <!-- /.box-body -->
+            </div>
+            <div class="box box-default">
+                <div class="box-header with-border">
+                    <i class="fa fa-bullhorn"></i>
+
+                    <h3 class="box-title">Mes evenements</h3>
+                    <div class="box-tools pull-right">
+                        <button type="button" class="btn btn-sm btn-success pull-right" data-widget="collapse"><i
+                                    class="fa fa-plus"></i> Ajouter
+                        </button>
+                    </div>
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body">
+
+                </div>
+                <!-- /.box-body -->
+            </div>
+            <!-- /.box -->
+        </div>
+        <div class="col-md-8">
+            <div class="box box-default">
+                <div class="box-header with-border">
+                    <i class="fa fa-bullhorn"></i>
+
+                    <h3 class="box-title">Calandrier</h3>
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body">
+
+                </div>
+                <!-- /.box-body -->
+            </div>
+            <!-- /.box -->
+        </div>
+    </div>
+
+    <div class="modal fade" id="modalDialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel"></h4>
+                </div>
+                <div class="modal-body">
+
+                </div>
+                <div class="modal-footer">
+
                 </div>
             </div>
-            <!-- /.box-header -->
-            <div class="box-body">
-
-            </div>
-            <!-- /.box-body -->
         </div>
-        <div class="box box-default">
-            <div class="box-header with-border">
-                <i class="fa fa-bullhorn"></i>
-
-                <h3 class="box-title">Liste des images</h3>
-                <div class="box-tools pull-right">
-                    <button type="button" class="btn btn-sm btn-success pull-right" data-widget="collapse"><i class="fa fa-picture-o"></i> Téléchargement
-                    </button>
-                </div>
-            </div>
-            <!-- /.box-header -->
-            <div class="box-body">
-
-            </div>
-            <!-- /.box-body -->
-        </div>
-        <!-- /.box -->
     </div>
-    <div class="col-md-8">
-        <div class="box box-default">
-            <div class="box-header with-border">
-                <i class="fa fa-bullhorn"></i>
-
-                <h3 class="box-title">Calandrier</h3>
-            </div>
-            <!-- /.box-header -->
-            <div class="box-body">
-
-            </div>
-            <!-- /.box-body -->
-        </div>
-        <!-- /.box -->
-    </div>
-</div>
 {% endblock %}
