@@ -30,12 +30,14 @@ class DefaultController extends Controller
         $time = time();
         $fs = new Filesystem();
         /** @var UploadedFile $file */
-        foreach ($request->files->get('file') as $file){
+
+        foreach ($request->files->get('file') as $key=>$file){
             $path = $diskPath.$time;
             $fs->mkdir($path, 0777);
-              $file->move($path, $file );
-              $tab[] = "/web/uploads/".$file->getClientOriginalName();
+            $filename = $key;
+              $file->move($path,  $filename);
+              $tab[] = "/uploads/$time/".$filename;
         }
-        return new JsonResponse($tab);
+        return new JsonResponse(array('id'=>$time,"files"=>$tab));
     }
 }
