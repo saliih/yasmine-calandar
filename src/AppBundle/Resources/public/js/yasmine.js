@@ -3,6 +3,27 @@
  */
 window.files = [];
 $(document).ready(function () {
+    $('.limitHeight2').on('submit', function () {
+        if (window.files.length < 12) {
+            $('#modalconfirm').modal();
+
+        }
+
+debugger;
+        var form = $(this);
+        var url = form.attr('action');
+        var type = form.attr('method');
+        var data = form.serializeArray();
+        var html = "";
+        $.each(window.files,function (endex,element) {
+            html += "#" + element;
+        });
+        data.push({name:'files',value:window.files});
+        getRequest(url, data, function (response) {
+            $('#modalconfirm2').modal();
+        }, {type: type, _xml_http_request: true, dataType: 'JSON'});
+        return false;
+    });
     $('#upload-file-selector').on("change", function () {
         $('#uploadForm').submit();
     });
@@ -35,8 +56,8 @@ $(document).ready(function () {
                     '</a>' +
                     '</div>';
             });
-            $('#listImages .row').html(html);
-            $('#listMonth .row').html(html2);
+            $('#listImages .row').append(html);
+            $('#listMonth .row').append(html2);
         },
         complete: function (xhr) {
             $('#progressModal').modal('hide');

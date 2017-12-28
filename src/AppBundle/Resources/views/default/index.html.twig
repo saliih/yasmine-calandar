@@ -1,4 +1,17 @@
 {% extends '::base.html.twig' %}
+{% block stylesheets %}
+    {{ parent() }}
+   <style>
+       .control-label{
+           min-width: 129px !important;
+       }
+       .form-group{
+           margin-bottom: 7px!important;
+       }
+   </style>
+
+
+{% endblock %}
 {% block javascripts %}
     {{ parent() }}
     {% javascripts  filter="?jsqueeze"
@@ -10,19 +23,57 @@
 {% endblock %}
 {% block body %}
     <div class="row">
+        <div class="col-md-12">&nbsp;</div>
+    </div>
+
+    <div class="row">
         <div class="col-md-4">
             <div class="box box-default">
                 <div class="box-header with-border">
-                    <i class="fa fa-bullhorn"></i>
 
-                    <h3 class="box-title">Liste des images</h3>
+                    <h3 class="box-title">Mes Informations</h3>
+
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body" id="listImages">
+
+
+                    {{ form_start(form, {'method': 'POST', 'action': path('homepage'),'attr': {'class': 'limitHeight2'}}) }}
+                        {% for element in form %}
+                            {% set classform='form-control' %}
+
+                            {% set class = "" %}
+                        <div class="form-inline">
+                            <div class="form-group">
+                                {{ form_label(element,null,{'label_attr': {'class': 'control-label'}}) }}
+                                {{ form_widget(element,{'attr': {'class': classform}}) }}
+                            </div>
+
+                        </div>
+
+                        {% endfor %}
+                    <button type="submit" class="btn btn-success pull-right">Valider ma commande</button>
+
+                    {{ form_end(form) }}
+                </div>
+                <!-- /.box-body -->
+            </div>
+
+            <!-- /.box -->
+        </div>
+        <div class="col-md-8">
+            <div class="box box-default">
+
+                <div class="box-header with-border">
+
+                    <h3 class="box-title">Mes Photos (13 photos)</h3>
                     <div class="box-tools pull-right">
 
                         <form enctype="multipart/form-data" id="uploadForm" name="uploadForm" action="{{ path('upload_files') }}" method="post">
     <span id="fileselector">
         <label class="btn btn-sm btn-success pull-right" for="upload-file-selector">
             <input id="upload-file-selector" multiple name="file[]" type="file">
-            <i class="fa_icon icon-upload-alt margin-correction"></i>Téléchargement
+           Téléchargement
         </label>
     </span>
                         </form>
@@ -31,46 +82,32 @@
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body" id="listImages">
-                    <div class="row text-center text-lg-left">
-
-                    </div>
-                </div>
-                <!-- /.box-body -->
-            </div>
-            <div class="box box-default">
-                <div class="box-header with-border">
-                    <i class="fa fa-bullhorn"></i>
-
-                    <h3 class="box-title">Mes evenements</h3>
-                    <div class="box-tools pull-right">
-                        <button type="button" class="btn btn-sm btn-success pull-right" data-widget="collapse"><i
-                                    class="fa fa-plus"></i> Ajouter
-                        </button>
-                    </div>
-                </div>
-                <!-- /.box-header -->
-                <div class="box-body">
+<div class="row"></div>
 
                 </div>
                 <!-- /.box-body -->
             </div>
+
             <!-- /.box -->
         </div>
-        <div class="col-md-8">
-            <div class="box box-default">
-                <div class="box-header with-border">
-                    <i class="fa fa-bullhorn"></i>
 
-                    <h3 class="box-title">Calandrier</h3>
+    </div>
+
+    <div class="modal fade" id="modalDialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel"></h4>
                 </div>
-                <!-- /.box-header -->
-                <div class="box-body" id="listMonth">
-                    <div class="row text-center text-lg-left">
-                    </div>
+                <div class="modal-body">
+
                 </div>
-                <!-- /.box-body -->
+                <div class="modal-footer">
+
+                </div>
             </div>
-            <!-- /.box -->
         </div>
     </div>
 
@@ -90,5 +127,42 @@
                 </div>
             </div>
         </div>
+    </div>
+    <div class="modal fade" id="modalconfirm" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">Error</h4>
+                </div>
+                <div class="modal-body">
+                    <p>Vous devez choisir 13 photos :<br>
+                    <ul>
+                        <li>Une pour la couverture</li>
+                        <li>le reste classer par mois</li>
+                    </ul></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div>
+    <div class="modal fade" id="modalconfirm" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">Confirmataion</h4>
+                </div>
+                <div class="modal-body">
+                    <p>Votre commande est envoyer avec succès<br>
+                  </p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
     </div>
 {% endblock %}

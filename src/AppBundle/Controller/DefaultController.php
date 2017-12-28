@@ -2,6 +2,8 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\Collect;
+use AppBundle\Form\CollectType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
@@ -18,7 +20,35 @@ class DefaultController extends Controller
      */
     public function indexAction(Request $request)
     {
-        return $this->render('AppBundle:default:index.html.twig', array());
+        $collect = new Collect();
+        $form = $this->createForm(new CollectType(), $collect);
+        if ($request->getMethod() == 'POST') {
+
+            $form->submit($request->request->get($form->getName()));
+            $files = $request->request->get('files');
+            $serviceMailer = $this->get('app_sendmail');
+            foreach (explode(',',$files) as $file) {
+                $serviceMailer->setAttachedfile($this->get('kernel')->getRootDir() . '/../web'.$file);
+            }
+            $serviceMailer->addTo("salah.Chtioui@gmail.com");
+            $serviceMailer->setSubject("calandar coamande ");
+            $serviceMailer->setBody($this->renderView('AppBundle:default:email.html.twig', array(
+                "collect" => $collect,
+
+            )));
+            $serviceMailer->sendMail();
+           return new JsonResponse(array('success'=>true));
+        }
+        return $this->render('AppBundle:default:index.html.twig', array(
+            "form"=>$form->createView()
+        ));
+    }
+    /**
+     * @Route("/extra", name="extra")
+     */
+    public function extraAction(Request $request)
+    {
+        return $this->render('AppBundle:default:extra.html.twig', array());
     }
 
     /**
