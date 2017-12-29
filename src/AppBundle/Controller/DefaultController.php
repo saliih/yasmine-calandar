@@ -67,7 +67,7 @@ class DefaultController extends Controller
             $fs->mkdir($path, 0777);
             $filename = $key.".jpg";
               $file->move($path,  $filename);
-              $tab[] = "/uploads/$time/".$filename;
+              $tab[] = "/calendar/web/uploads/$time/".$filename;
         }
         return new JsonResponse(array('id'=>$time,"files"=>$tab));
     }
