@@ -40,6 +40,12 @@ class Collect
      * @ORM\Column(name="dcr", type="datetime")
      */
     private $dcr;
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="act", type="boolean")
+     */
+    private $act;
 
     /**
      * @var string
@@ -64,6 +70,7 @@ class Collect
     public function __construct()
     {
         $this->dcr = new \DateTime();
+        $this->act = true;
     }
 
     /**
@@ -203,6 +210,22 @@ class Collect
     public function setFiles($files)
     {
         $this->files = $files;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isAct()
+    {
+        return $this->act;
+    }
+
+    /**
+     * @param bool $act
+     */
+    public function setAct($act)
+    {
+        $this->act = $act;
     }
 }
 

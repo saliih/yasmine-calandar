@@ -1,0 +1,77 @@
+{% extends '::base.html.twig' %}
+{% block stylesheets %}
+    {{ parent() }}
+    <style>
+        .control-label{
+            min-width: 129px !important;
+        }
+        .form-group{
+            margin-bottom: 7px!important;
+        }
+    </style>
+
+
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    {% javascripts  filter="?jsqueeze"
+    '@AppBundle/Resources/public/js/utils.js'
+    '@AppBundle/Resources/public/js/yasmine.js' %}
+    <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+
+{% endblock %}
+{% block body %}
+    <div class="row">
+        <div class="col-md-12">&nbsp;</div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box box-default">
+                <div class="box-header with-border">
+
+                    <h3 class="box-title">Commandes</h3>
+
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body" id="listImages">
+                    <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                        {% for item in collects %}
+                        <div class="panel panel-default">
+                            <div class="panel-heading" role="tab" id="heading{{ item.id }}">
+                                <h4 class="panel-title">
+                                    <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse{{ item.id }}" aria-expanded="false" class="collapsed" aria-controls="collapse{{ item.id }}">
+                                       {{ item.dcr | date("d-m-Y H:I:s") }} : {{ item.name }}
+                                    </a>
+                                </h4>
+                            </div>
+                            <div id="collapse{{ item.id }}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading{{ item.id }}">
+                                <div class="panel-body">
+                                    <p><strong>Email : </strong>{{ item.email }}</p>
+                                    <p><strong>Gsm : </strong>{{ item.mobile }}</p>
+                                    <p><strong>Adresse : </strong>{{ item.adress }}</p>
+                                    {% for image in item.files %}
+                                        <div class="col-lg-4 col-md-4 col-xs-6 height300" >
+                                            <a href="#" class="d-block mb-4 h-100">
+                                                <img class="img-fluid img-thumbnail" src="{{ asset(image) }}" alt="">
+                                                </a>
+                                            </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                      {% endfor %}
+                    </div>
+                </div>
+                <!-- /.box-body -->
+            </div>
+
+            <!-- /.box -->
+        </div>
+
+
+    </div>
+
+
+{% endblock %}

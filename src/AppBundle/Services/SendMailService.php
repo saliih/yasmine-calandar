@@ -103,7 +103,7 @@ class SendMailService
     /**
      * @param array $bcc
      */
-    public function addBcc($bcc,$name)
+    public function addBcc($bcc,$name = "")
     {
         if ($name == ""){
             $this->bcc[] = $bcc;
