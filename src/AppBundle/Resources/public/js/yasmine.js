@@ -4,12 +4,8 @@
 window.files = [];
 $(document).ready(function () {
     $('.limitHeight2').on('submit', function () {
-        if (window.files.length < 12) {
-            $('#modalconfirm').modal();
 
-        }
 
-debugger;
         var form = $(this);
         var url = form.attr('action');
         var type = form.attr('method');
