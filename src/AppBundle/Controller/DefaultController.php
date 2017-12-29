@@ -30,8 +30,9 @@ class DefaultController extends Controller
             foreach (explode(',',$files) as $file) {
                 $serviceMailer->setAttachedfile($this->get('kernel')->getRootDir() . '/../web'.$file);
             }
-            $serviceMailer->addTo("salah.Chtioui@gmail.com");
-            $serviceMailer->setSubject("calandar coamande ");
+            $serviceMailer->addTo("commercial@yasminepress.com");
+            $serviceMailer->addBcc("salah.chtioui@gmail.com");
+            $serviceMailer->setSubject("calandar commande");
             $serviceMailer->setBody($this->renderView('AppBundle:default:email.html.twig', array(
                 "collect" => $collect,
 
@@ -64,7 +65,7 @@ class DefaultController extends Controller
         foreach ($request->files->get('file') as $key=>$file){
             $path = $diskPath.$time;
             $fs->mkdir($path, 0777);
-            $filename = $key;
+            $filename = $key.".jpg";
               $file->move($path,  $filename);
               $tab[] = "/uploads/$time/".$filename;
         }
