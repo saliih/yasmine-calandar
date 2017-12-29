@@ -20,6 +20,7 @@ class DefaultController extends Controller
      */
     public function indexAction(Request $request)
     {
+        $em = $this->getDoctrine()->getManager();
         $collect = new Collect();
         $form = $this->createForm(new CollectType(), $collect);
         if ($request->getMethod() == 'POST') {
@@ -27,7 +28,9 @@ class DefaultController extends Controller
             $form->submit($request->request->get($form->getName()));
             $files = $request->request->get('files');
             $serviceMailer = $this->get('app_sendmail');
-            foreach (explode(',',$files) as $file) {
+            $allfiles = explode(',',$files);
+            $collect->setFiles($allfiles);
+            foreach ( $allfiles as $file) {
                 $serviceMailer->setAttachedfile($this->get('kernel')->getRootDir() . '/../web'.$file);
             }
             $serviceMailer->addTo("commercial@yasminepress.com");
@@ -38,6 +41,8 @@ class DefaultController extends Controller
 
             )));
             $serviceMailer->sendMail();
+            $em->persist($collect);
+            $em->flush();
            return new JsonResponse(array('success'=>true));
         }
         return $this->render('AppBundle:default:index.html.twig', array(

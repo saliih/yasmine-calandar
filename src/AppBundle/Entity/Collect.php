@@ -34,6 +34,12 @@ class Collect
      * @ORM\Column(name="email", type="string", length=255)
      */
     private $email;
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="dcr", type="datetime")
+     */
+    private $dcr;
 
     /**
      * @var string
@@ -48,6 +54,33 @@ class Collect
      * @ORM\Column(name="mobile", type="string", length=255)
      */
     private $mobile;
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="files", type="array", nullable=true)
+     */
+    private $files;
+
+    public function __construct()
+    {
+        $this->dcr = new \DateTime();
+    }
+
+    /**
+     * @return string
+     */
+    public function getDcr()
+    {
+        return $this->dcr;
+    }
+
+    /**
+     * @param string $dcr
+     */
+    public function setDcr($dcr)
+    {
+        $this->dcr = $dcr;
+    }
 
 
     /**
@@ -154,6 +187,22 @@ class Collect
     public function getMobile()
     {
         return $this->mobile;
+    }
+
+    /**
+     * @return string
+     */
+    public function getFiles()
+    {
+        return $this->files;
+    }
+
+    /**
+     * @param string $files
+     */
+    public function setFiles($files)
+    {
+        $this->files = $files;
     }
 }
 
