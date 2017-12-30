@@ -32,7 +32,7 @@
 
                 <div class="box-header with-border">
 
-                    <h3 class="box-title">Mes Photos (13 photos)</h3>
+                    <h3 class="box-title">Mes Photos (18 photos max)</h3>
                     <div class="box-tools pull-right">
 
                         <form enctype="multipart/form-data" id="uploadForm" name="uploadForm" action="{{ path('upload_files') }}" method="post">
@@ -49,7 +49,7 @@
                 <!-- /.box-header -->
                 <div class="box-body" id="listImages">
                     <div class="alert alert-info">
-                        <strong>Info!</strong>Merci de téléchargez vos images à l'aide de bouton télécharger en haut avant de valider votre commande.
+                        <strong>Info!&nbsp;</strong>Merci de téléchargez vos images à l'aide du bouton télécharger en haut et remplire les champs avant de valider votre commande.
                     </div>
                     <div class="row"></div>
 
@@ -79,6 +79,13 @@
                             <div class="form-group">
                                 {{ form_label(element,null,{'label_attr': {'class': 'control-label'}}) }}
                                 {{ form_widget(element,{'attr': {'class': classform}}) }}
+                                {% if element.vars['name'] == "message" %}
+                                    <span class="help-block">Inserez vos dates importantes, et voila un example:<br>
+                                    25/02/2018 anniversaie Maman<br>
+                                    04/06/2018 anniversaire de mariage<br>
+                                        ....
+                                    </span>
+                                {% endif %}
                             </div>
 
                         </div>

@@ -5,6 +5,7 @@ namespace AppBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
 
 class CollectType extends AbstractType
 {
@@ -15,10 +16,11 @@ class CollectType extends AbstractType
     {
         $builder
             ->add('name', null, array('required'=>true, "label"=>"Nom et Prénom"))
-            ->add('email',null,array('required'=>true, 'label'=>"Adresse e-mail"))
+                ->add('email',EmailType::class,array('required'=>true, 'label'=>"Adresse e-mail"))
             ->add('mobile',null,array('required'=>true, 'label'=>"Téléphone"))
             ->add('adress',null,array('required'=>true, 'label'=>"Adresse"))
-            ->add('message',null,array('required'=>true, 'label'=>"Dates importantes"))
+            ->add('message',null,array('required'=>true, 'label'=>"Dates importantes",
+                /*'sonata_help' => 'Set the title of a web page'*/))
         ;
     }/**
      * {@inheritdoc}
