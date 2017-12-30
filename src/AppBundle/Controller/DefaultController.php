@@ -68,7 +68,7 @@ class DefaultController extends Controller
         /** @var UploadedFile $file */
 
         //foreach ( as $key=>$file){
-            $file = $request->files->get('file')
+            $file = $request->files->get('file');
             $path = $diskPath.$time;
             $fs->mkdir($path, 0777);
             $filename = rand(400,5458).".jpg";
