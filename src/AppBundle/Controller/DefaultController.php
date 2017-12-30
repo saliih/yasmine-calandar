@@ -67,13 +67,14 @@ class DefaultController extends Controller
         $fs = new Filesystem();
         /** @var UploadedFile $file */
 
-        foreach ($request->files->get('file') as $key=>$file){
+        //foreach ( as $key=>$file){
+            $file = $request->files->get('file')
             $path = $diskPath.$time;
             $fs->mkdir($path, 0777);
-            $filename = $key.".jpg";
+            $filename = rand(400,5458).".jpg";
               $file->move($path,  $filename);
               $tab[] = "/calendar/web/uploads/$time/".$filename;
-        }
+        //}
         return new JsonResponse(array('id'=>$time,"files"=>$tab));
     }
 }
