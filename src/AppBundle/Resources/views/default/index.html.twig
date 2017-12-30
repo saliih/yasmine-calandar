@@ -38,7 +38,7 @@
                         <form enctype="multipart/form-data" id="uploadForm" name="uploadForm" action="{{ path('upload_files') }}" method="post">
     <span id="fileselector">
         <label class="btn btn-sm btn-success pull-right" for="upload-file-selector">
-            <input id="upload-file-selector" multiple name="file" type="file">
+            <input id="upload-file-selector" name="file[]" type="file">
            Téléchargement
         </label>
     </span>
