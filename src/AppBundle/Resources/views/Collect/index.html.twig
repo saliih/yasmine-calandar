@@ -37,6 +37,7 @@
                 <!-- /.box-header -->
                 <div class="box-body" id="listImages">
                     <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                        {% if collects | length >0 %}
                         {% for item in collects %}
                         <div class="panel panel-default">
                             <div class="panel-heading" role="tab" id="heading{{ item.id }}">
@@ -48,12 +49,13 @@
                             </div>
                             <div id="collapse{{ item.id }}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading{{ item.id }}">
                                 <div class="panel-body">
+                                    <a href="{{ path('collect_validate',{id:item.id}) }}" class="btn btn-sm btn-success pull-right">Valider</a>
                                     <p><strong>Email : </strong>{{ item.email }}</p>
                                     <p><strong>Gsm : </strong>{{ item.mobile }}</p>
                                     <p><strong>Adresse : </strong>{{ item.adress }}</p>
                                     {% for image in item.files %}
                                         <div class="col-lg-4 col-md-4 col-xs-6 height300" >
-                                            <a href="#" class="d-block mb-4 h-100">
+                                            <a download href="{{ asset(image) }}" class="d-block mb-4 h-100">
                                                 <img class="img-fluid img-thumbnail" src="{{ asset(image) }}" alt="">
                                                 </a>
                                             </div>
@@ -62,6 +64,11 @@
                             </div>
                         </div>
                       {% endfor %}
+                        {% else %}
+                            <div class="alert alert-info">
+                                <strong>Info!</strong> Pas de commande en cour.
+                            </div>
+                        {% endif %}
                     </div>
                 </div>
                 <!-- /.box-body -->

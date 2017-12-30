@@ -4,6 +4,7 @@ namespace AppBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use AppBundle\Entity\Collect;
 
 class CollectController extends Controller
 {
@@ -16,5 +17,16 @@ class CollectController extends Controller
         return $this->render('@App/Collect/index.html.twig', array(
             'collects'=>$collect
         ));
+    }
+    /**
+     * @Route("/collectlistcalider/{id}", name="collect_validate")
+     */
+    public function validateAction(Collect $collect)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $collect->setAct(false);
+        $em->persist($collect);
+        $em->flush();
+        return $this->redirectToRoute('collect_list');
     }
 }
