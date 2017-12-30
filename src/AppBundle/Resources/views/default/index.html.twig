@@ -27,6 +27,38 @@
     </div>
 
     <div class="row">
+        <div class="col-md-8">
+            <div class="box box-default">
+
+                <div class="box-header with-border">
+
+                    <h3 class="box-title">Mes Photos (13 photos)</h3>
+                    <div class="box-tools pull-right">
+
+                        <form enctype="multipart/form-data" id="uploadForm" name="uploadForm" action="{{ path('upload_files') }}" method="post">
+    <span id="fileselector">
+        <label class="btn btn-sm btn-success pull-right" for="upload-file-selector">
+            <input id="upload-file-selector" multiple name="file[]" type="file">
+           Téléchargement
+        </label>
+    </span>
+                        </form>
+
+                    </div>
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body" id="listImages">
+                    <div class="alert alert-info">
+                        <strong>Info!</strong>Merci de téléchargez vos images à l'aide de bouton télécharger en haut avant de valider votre commande.
+                    </div>
+                    <div class="row"></div>
+
+                </div>
+                <!-- /.box-body -->
+            </div>
+
+            <!-- /.box -->
+        </div>
         <div class="col-md-4">
             <div class="box box-default">
                 <div class="box-header with-border">
@@ -55,35 +87,6 @@
                     <button type="submit" class="btn btn-success pull-right">Valider ma commande</button>
 
                     {{ form_end(form) }}
-                </div>
-                <!-- /.box-body -->
-            </div>
-
-            <!-- /.box -->
-        </div>
-        <div class="col-md-8">
-            <div class="box box-default">
-
-                <div class="box-header with-border">
-
-                    <h3 class="box-title">Mes Photos (13 photos)</h3>
-                    <div class="box-tools pull-right">
-
-                        <form enctype="multipart/form-data" id="uploadForm" name="uploadForm" action="{{ path('upload_files') }}" method="post">
-    <span id="fileselector">
-        <label class="btn btn-sm btn-success pull-right" for="upload-file-selector">
-            <input id="upload-file-selector" multiple name="file[]" type="file">
-           Téléchargement
-        </label>
-    </span>
-                        </form>
-
-                    </div>
-                </div>
-                <!-- /.box-header -->
-                <div class="box-body" id="listImages">
-<div class="row"></div>
-
                 </div>
                 <!-- /.box-body -->
             </div>

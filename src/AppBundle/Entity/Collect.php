@@ -27,6 +27,12 @@ class Collect
      * @ORM\Column(name="name", type="string", length=255)
      */
     private $name;
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="message", type="text", nullable=true)
+     */
+    private $message;
 
     /**
      * @var string
@@ -226,6 +232,22 @@ class Collect
     public function setAct($act)
     {
         $this->act = $act;
+    }
+
+    /**
+     * @return string
+     */
+    public function getMessage()
+    {
+        return $this->message;
+    }
+
+    /**
+     * @param string $message
+     */
+    public function setMessage($message)
+    {
+        $this->message = $message;
     }
 }
 

@@ -18,6 +18,7 @@ class CollectType extends AbstractType
             ->add('email',null,array('required'=>true, 'label'=>"Adresse e-mail"))
             ->add('mobile',null,array('required'=>true, 'label'=>"Téléphone"))
             ->add('adress',null,array('required'=>true, 'label'=>"Adresse"))
+            ->add('message',null,array('required'=>true, 'label'=>"Dates importantes"))
         ;
     }/**
      * {@inheritdoc}
