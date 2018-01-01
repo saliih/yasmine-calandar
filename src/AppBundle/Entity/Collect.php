@@ -27,6 +27,13 @@ class Collect
      * @ORM\Column(name="name", type="string", length=255)
      */
     private $name;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="format", type="string", length=255)
+     */
+    private $format;
     /**
      * @var string
      *
@@ -248,6 +255,22 @@ class Collect
     public function setMessage($message)
     {
         $this->message = $message;
+    }
+
+    /**
+     * @return string
+     */
+    public function getFormat()
+    {
+        return $this->format;
+    }
+
+    /**
+     * @param string $format
+     */
+    public function setFormat($format)
+    {
+        $this->format = $format;
     }
 }
 

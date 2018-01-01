@@ -3,6 +3,7 @@
 namespace AppBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
@@ -19,6 +20,9 @@ class CollectType extends AbstractType
                 ->add('email',EmailType::class,array('required'=>true, 'label'=>"Adresse e-mail"))
             ->add('mobile',null,array('required'=>true, 'label'=>"Téléphone"))
             ->add('adress',null,array('required'=>true, 'label'=>"Adresse"))
+            ->add('format',ChoiceType::class,array('required'=>true, 'label'=>"Format de calendrier",'choices'=>array('Calendrier mural format 31x46cm'=>"Calendrier mural format 31x46cm",
+                "Calendrier de bureau format 21x10cm"=>"Calendrier de bureau format 21x10cm"
+                )))
             ->add('message',null,array('required'=>true, 'label'=>"Dates importantes",
                 /*'sonata_help' => 'Set the title of a web page'*/))
         ;
