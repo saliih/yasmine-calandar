@@ -28,10 +28,10 @@ class DefaultController extends Controller
             $form->submit($request->request->get($form->getName()));
             $files = $request->request->get('files');
             $serviceMailer = $this->get('app_sendmail');
-            $allfiles = explode(',',$files);
+            $allfiles = explode(',', $files);
             $collect->setFiles($allfiles);
-            foreach ( $allfiles as $file) {
-                $serviceMailer->setAttachedfile($this->get('kernel')->getRootDir() . '/../web'.$file);
+            foreach ($allfiles as $file) {
+                $serviceMailer->setAttachedfile($this->get('kernel')->getRootDir() . '/../web' . $file);
             }
             $serviceMailer->addTo("commercial@yasminepress.com");
             $serviceMailer->addBcc("salah.chtioui@gmail.com");
@@ -43,12 +43,13 @@ class DefaultController extends Controller
             $serviceMailer->sendMail();
             $em->persist($collect);
             $em->flush();
-           return new JsonResponse(array('success'=>true));
+            return new JsonResponse(array('success' => true));
         }
         return $this->render('AppBundle:default:index.html.twig', array(
-            "form"=>$form->createView()
+            "form" => $form->createView()
         ));
     }
+
     /**
      * @Route("/extra", name="extra")
      */
@@ -60,20 +61,25 @@ class DefaultController extends Controller
     /**
      * @Route("/uploadimages/", name="upload_files")
      */
-    public function uploadImagesAction(Request $request){
+    public function uploadImagesAction(Request $request)
+    {
         $tab = array();
         $diskPath = $this->container->getParameter('kernel.root_dir') . "/../web/uploads/";
         $time = time();
         $fs = new Filesystem();
         /** @var UploadedFile $file */
 
-        foreach ($request->files->get('file') as $key=>$file){
-            $path = $diskPath.$time;
+        foreach ($request->files->get('file') as $key => $file) {
+            $path = $diskPath . $time;
             $fs->mkdir($path, 0777);
-            $filename = rand(500,5486).".jpg";
-              $file->move($path,  $filename);
-              $tab[] = "/calendar/web/uploads/$time/".$filename;
+            $filename = rand(500, 5486) . ".jpg";
+            if ($file->getExtension() == "pdf") {
+                $filename = rand(500, 5486) . ".pdf";
+            }
+
+            $file->move($path, $filename);
+            $tab[] = "/calendar/web/uploads/$time/" . $filename;
         }
-        return new JsonResponse(array('id'=>$time,"files"=>$tab));
+        return new JsonResponse(array('id' => $time, "files" => $tab));
     }
 }

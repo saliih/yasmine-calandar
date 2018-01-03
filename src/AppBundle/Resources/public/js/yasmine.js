@@ -40,15 +40,19 @@ $(document).ready(function () {
             var html = "";
             var html2 = "";
             $.each(result.files, function (index, path) {
+                var path2 = path
+                if(path.indexOf('pdf')){
+                    path2 = pdfimage;
+                }
                 window.files.push(path);
                 html += '<div class="col-lg-4 col-md-4 col-xs-6">' +
                     '<a href="#" class="d-block mb-4 h-100">' +
-                    '<img class="img-fluid img-thumbnail" src="' + path + '" alt="">' +
+                    '<img class="img-fluid img-thumbnail" src="' + path2 + '" alt="">' +
                     '</a>' +
                     '</div>';
                 html2 += '<div class="col-lg-4 col-md-4 col-xs-6 height300" >' +
                     '<a href="#" class="d-block mb-4 h-100">' +
-                    '<img class="img-fluid img-thumbnail" src="' + path + '" alt="">' +
+                    '<img class="img-fluid img-thumbnail" src="' + path2 + '" alt="">' +
                     '</a>' +
                     '</div>';
             });
