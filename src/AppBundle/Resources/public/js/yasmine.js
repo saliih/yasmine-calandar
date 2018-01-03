@@ -41,7 +41,7 @@ $(document).ready(function () {
             var html2 = "";
             $.each(result.files, function (index, path) {
                 var path2 = path
-                if(path.indexOf('pdf')){
+                if(path.indexOf('pdf') != -1){
                     path2 = pdfimage;
                 }
                 window.files.push(path);
