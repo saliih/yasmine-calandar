@@ -41,9 +41,9 @@ $(document).ready(function () {
             var html2 = "";
             $.each(result.files, function (index, path) {
                 var path2 = path
-                if(path.indexOf('pdf') != -1){
+                /*if(path.indexOf('pdf') != -1){
                     path2 = pdfimage;
-                }
+                }*/
                 window.files.push(path);
                 html += '<div class="col-lg-4 col-md-4 col-xs-6">' +
                     '<a href="#" class="d-block mb-4 h-100">' +
